@@ -1,0 +1,16 @@
+--creating table on json data storing it as parquet using Snappy compression standard
+
+create table yelp_academic_review_prq (
+votes struct<funny:int, useful:int, cool:int>,
+user_id string,
+review_id string,
+stars int,
+date string,
+text string,
+type string, 
+business_id string,
+verbose bigint) 
+row format delimited 
+fields terminated by '\t'
+stored as parquet 
+TBLPROPERTIES ('compression' = 'snappy');

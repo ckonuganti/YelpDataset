@@ -1,0 +1,10 @@
+--Query to get the top 10 users based on the votes.
+
+select 
+user_id, 
+review_id, 
+votes.funny, 
+votes.useful, 
+votes.cool, 
+dense_rank() over( order by votes.funny+votes.useful+votes.cool desc) 
+from yelp_academic_review_prq where type='review' limit 10;

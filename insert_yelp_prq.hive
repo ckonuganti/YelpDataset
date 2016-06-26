@@ -1,0 +1,15 @@
+
+--insert data into parquet table using function to split the review data and peerforming the count. 
+
+insert overwrite table yelp_academic_review_prq
+select 
+votes,
+user_id,
+review_id as review_id,
+stars as stars,
+date as date,
+text as text,
+type as type, 
+business_id as business_id ,
+count(verbose) as verbose 
+from yelp_academic_review lateral view explode(split(text,' ')) m as verbose group by votes, user_id, review_id, stars, date, text,type, business_id ;
